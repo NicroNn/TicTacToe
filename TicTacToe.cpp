@@ -68,8 +68,76 @@ void playerMove()
 }
 
 // Функция для хода компьютера
-void computerMove()
-{}
+void computerMove() {
+    // Проверяем, есть ли победная комбинация по строкам
+    for (int i = 0; i < 3; i++) {
+        if (board[i][0] == board[i][1] && board[i][0] != ' ' && board[i][2] == ' ') {
+            board[i][2] = 'O';
+            return;
+        }
+        if (board[i][0] == board[i][2] && board[i][0] != ' ' && board[i][1] == ' ') {
+            board[i][1] = 'O';
+            return;
+        }
+        if (board[i][1] == board[i][2] && board[i][1] != ' ' && board[i][0] == ' ') {
+            board[i][0] = 'O';
+            return;
+        }
+    }
+
+    // Проверяем, есть ли победная комбинация по столбцам
+    for (int j = 0; j < 3; j++) {
+        if (board[0][j] == board[1][j] && board[0][j] != ' ' && board[2][j] == ' ') {
+            board[2][j] = 'O';
+            return;
+        }
+        if (board[0][j] == board[2][j] && board[0][j] != ' ' && board[1][j] == ' ') {
+            board[1][j] = 'O';
+            return;
+        }
+        if (board[1][j] == board[2][j] && board[1][j] != ' ' && board[0][j] == ' ') {
+            board[0][j] = 'O';
+            return;
+        }
+    }
+
+    // Проверяем, есть ли победная комбинация по диагоналям
+    if (board[0][0] == board[1][1] && board[0][0] != ' ' && board[2][2] == ' ') {
+        board[2][2] = 'O';
+        return;
+    }
+    if (board[0][0] == board[2][2] && board[0][0] != ' ' && board[1][1] == ' ') {
+        board[1][1] = 'O';
+        return;
+    }
+    if (board[1][1] == board[2][2] && board[1][1] != ' ' && board[0][0] == ' ') {
+        board[0][0] = 'O';
+        return;
+    }
+
+    if (board[0][2] == board[1][1] && board[0][2] != ' ' && board[2][0] == ' ') {
+        board[2][0] = 'O';
+        return;
+    }
+    if (board[0][2] == board[2][0] && board[0][2] != ' ' && board[1][1] == ' ') {
+        board[1][1] = 'O';
+        return;
+    }
+    if (board[1][1] == board[2][0] && board[1][1] != ' ' && board[0][2] == ' ') {
+        board[0][2] = 'O';
+        return;
+    }
+
+    // Если нет победных комбинаций, делаем случайный ход
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (board[i][j] == ' ') {
+                board[i][j] = 'O';
+                return;
+            }
+        }
+    }
+}
 
 // Основная функция для игры
 int main()
