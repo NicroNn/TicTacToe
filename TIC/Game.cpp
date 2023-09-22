@@ -30,7 +30,7 @@ int checkWin(int guy, int **board) {
 }
 
 int *playerMove(int **board) {
-    int* move = new int[2] {0, 0};
+    int *move = new int[2];
     std::cout << "Enter Cords {X, Y}: ";
     std::cin >> move[0] >> move[1];
     while (board[move[1] - 1][move[0] - 1] != 0) {
@@ -49,7 +49,12 @@ int *playerMove(int **board) {
 int game(int gameType, int boardOpts) {
     int **board = new int*[3];
     for (int i = 0; i < 3; i++) {
-        board[i] = new int[3] {0, 0, 0};
+        board[i] = new int[3];
+    }
+    for (int y = 0; y < 3; y++) {
+        for (int x = 0; x < 3; x++) {
+            board[y][x] = 0;
+        }
     }
     int turns=0, guy;
     cleanCmd();
@@ -64,8 +69,8 @@ int game(int gameType, int boardOpts) {
     }
     guy--;
     while (turns < 9) {
-        int* move = new int[2] {0, 0};
-        if (guy == 0) {
+        int *move = new int[2];
+        if (guy == 0 or gameType==1) {
             move = playerMove(board);
         } else {
             move = AI(turns, board);
